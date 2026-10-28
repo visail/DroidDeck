@@ -1101,6 +1101,11 @@ class AgentTest(Temp):
         self.assertIn(r'if (/"form"\s*:\s*\{/.test(s)) {', script)
         self.assertIn("the game folder already holds a game", script)
 
+    def test_the_driver_asks_blizzards_chinese_repository_for_chinese_installs(self):
+        script = BNET["AGENT_SCRIPT"]
+        self.assertIn('var patch = zone == "cn" ? "cn.patch.battlenet.com.cn" : zone + ".patch.battle.net";', script)
+        self.assertIn("+ patch + ':1119/'", script)
+
 
 class AgentJobTest(Harness):
     def setUp(self):
